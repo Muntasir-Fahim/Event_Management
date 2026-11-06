@@ -25,7 +25,7 @@ struct ActivityReg
     int activityId;
 };
 
-//File operation
+//Start Automatic ID 
 int loadId(){
     int id;
     FILE* fptr;
@@ -61,6 +61,7 @@ int assignID(){
     return id;
 
 }
+//End Automatic ID
 
 void menu(){
     printf("1. Register\n");
@@ -73,34 +74,48 @@ void menu(){
 
 int main(){
 
-    int select;
+    int select = 0;
     while (select != -1)
     {    
         menu();
         scanf("%d",&select);
         // if(select == -1){printf("hELL"); break;}
 
-        if(select == 1){
+        switch (select)
+        {
+        case 1:
             infoLog[infoIndex].id = assignID();
             printf("\nEnter name: ");
-            scanf("%s",infoLog[infoIndex].name);
+            // scanf("%s",infoLog[infoIndex].name);
+            scanf(" %19[^\n]", infoLog[infoIndex].name);
             printf("\nEnter Email: ");
             scanf("%s",infoLog[infoIndex].email);
             printf("\nEnter Contact Number: ");
             scanf("%s",infoLog[infoIndex].phone);
             printf("\nEnter Category (Student / Teacher / Guest): ");
-            scanf("%s",infoLog[infoIndex].name);
+            scanf("%s",infoLog[infoIndex].category);
 
             infoIndex++;
-        }
-        else if(select == 2){
 
-        }
-        else if(select == 3){
+            break;
+        case 2:
+            
+            break;
 
-        }
-        else if(select == 4){
+        case 3:
+        
+        
+            break;
+        
+        case 4:
 
+
+            break;
+
+
+        default:
+            printf("INVALID CHOICE\n");
+            break;
         }
     }
 }
