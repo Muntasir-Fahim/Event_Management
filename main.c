@@ -1,17 +1,19 @@
 #include <stdio.h>
 
+#define MAX_PARTICIPANT 500
+
 struct Info{
     int id;
-    char name[20];
-    char email[50];
-    char phone[14];
+    char name[100];
+    char email[100];
+    char phone[15];
     char category[10]; // student/ teacher/ guest 
     int attendance; //Yes of no
     int meal;//same
 
 };
 
-struct Info infoLog[500];
+struct Info infoLog[MAX_PARTICIPANT];
 int infoIndex = 0;
 struct Activity
 {
@@ -35,7 +37,7 @@ int loadId(){
     if(fptr == NULL) return 1000;
 
     if (fscanf(fptr, "%d", &id) != 1) id = 1000;
-    else fscanf(fptr,"%d",&id);
+    // else fscanf(fptr,"%d",&id);
 
     fclose(fptr);
 
@@ -63,6 +65,22 @@ int assignID(){
 }
 //End Automatic ID
 
+//Registration part
+void Registration(){
+    infoLog[infoIndex].id = assignID();
+    printf("\nEnter name: ");
+    // scanf("%s",infoLog[infoIndex].name);
+    scanf(" %99[^\n]", infoLog[infoIndex].name);
+    printf("\nEnter Email: ");
+    scanf("%99s",infoLog[infoIndex].email);
+    printf("\nEnter Contact Number: ");
+    scanf("%14s",infoLog[infoIndex].phone);
+    printf("\nEnter Category (Student / Teacher / Guest): ");
+    scanf("%s",infoLog[infoIndex].category);
+
+    infoIndex++;
+}
+
 void menu(){
     printf("1. Register\n");
     printf("2. Search Participant\n");
@@ -79,43 +97,33 @@ int main(){
     {    
         menu();
         scanf("%d",&select);
-        // if(select == -1){printf("hELL"); break;}
 
         switch (select)
         {
-        case 1:
-            infoLog[infoIndex].id = assignID();
-            printf("\nEnter name: ");
-            // scanf("%s",infoLog[infoIndex].name);
-            scanf(" %19[^\n]", infoLog[infoIndex].name);
-            printf("\nEnter Email: ");
-            scanf("%s",infoLog[infoIndex].email);
-            printf("\nEnter Contact Number: ");
-            scanf("%s",infoLog[infoIndex].phone);
-            printf("\nEnter Category (Student / Teacher / Guest): ");
-            scanf("%s",infoLog[infoIndex].category);
+            case -1:
+                printf("Exiting...\n");
+                break;    
+            case 1:
+                Registration();
+                break;
+            case 2:
+                
+                break;
 
-            infoIndex++;
-
-            break;
-        case 2:
+            case 3:
             
-            break;
-
-        case 3:
-        
-        
-            break;
-        
-        case 4:
+            
+                break;
+            
+            case 4:
 
 
-            break;
+                break;
 
 
-        default:
-            printf("INVALID CHOICE\n");
-            break;
+            default:
+                printf("INVALID CHOICE\n");
+                break;
         }
     }
 }
